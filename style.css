@@ -1,0 +1,68 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #06060a; }
+body { font: 12px/1.4 ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: #cfd2e0; cursor: default; }
+canvas { display: block; }
+
+/* --- capas de UI: todo por encima del canvas, sin capturar clicks --- */
+#speedlines, #overlay, #crosshair, #vitals, #hud { position: fixed; pointer-events: none; z-index: 5; }
+#overlay { inset: 0; overflow: hidden; }
+
+/* speed lines: un solo gradiente cuya opacidad maneja fx.js */
+#speedlines {
+  inset: 0; opacity: 0; z-index: 4;
+  background: radial-gradient(ellipse 45% 40% at 50% 50%, transparent 40%, rgba(255,0,180,.10) 72%, rgba(120,0,255,.5) 100%);
+  transition: opacity .08s linear;
+}
+
+#crosshair { left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px;
+  border-radius: 50%; background: #fff; box-shadow: 0 0 8px #f0f; opacity: .75; }
+
+/* --- números de daño --- */
+.dmg { position: absolute; font-weight: 800; letter-spacing: -.5px; will-change: transform, opacity;
+  text-shadow: 0 0 10px currentColor, 0 2px 0 #000; animation: float .75s cubic-bezier(.15,.9,.3,1) forwards; }
+@keyframes float {
+  0%   { transform: translate(-50%,-50%) scale(.4); opacity: 0; }
+  18%  { transform: translate(-50%,-50%) scale(1.25); opacity: 1; }
+  100% { transform: translate(-50%,-140%) scale(.95); opacity: 0; }
+}
+
+/* --- barras de vida flotantes de enemigos --- */
+.ehp { position: absolute; width: 44px; height: 4px; margin-left: -22px;
+  background: #000a; border: 1px solid #ffffff26; }
+.ehp > i { display: block; height: 100%; background: linear-gradient(90deg, #ff2d6f, #ff8a3d); transition: width .12s linear; }
+
+/* --- retícula de lock-on --- */
+#reticle { position: absolute; width: 40px; height: 40px; margin: -20px 0 0 -20px; border: 2px solid #22e9ff;
+  border-radius: 50%; box-shadow: 0 0 14px #22e9ff, inset 0 0 10px #22e9ff44; display: none;
+  animation: spin 3s linear infinite; }
+#reticle::before, #reticle::after { content: ""; position: absolute; background: #22e9ff; }
+#reticle::before { left: -8px; top: 50%; width: 6px; height: 2px; }
+#reticle::after  { right: -8px; top: 50%; width: 6px; height: 2px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --- vitals --- */
+#vitals { left: 18px; bottom: 18px; }
+.bar { width: 190px; height: 10px; background: #000a; border: 1px solid #ffffff26; }
+.bar > i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, #22e9ff, #b14bff); transition: width .15s; }
+#cds { display: flex; gap: 6px; margin-top: 6px; }
+#cds span { padding: 2px 7px; font-size: 10px; letter-spacing: 1px; border: 1px solid #ffffff26; color: #6a6f85; }
+#cds span.on { color: #0b0b12; background: #22e9ff; border-color: #22e9ff; box-shadow: 0 0 12px #22e9ff88; }
+
+/* --- HUD de tuning --- */
+#hud { right: 14px; top: 14px; text-align: right; font-size: 11px; color: #7c8199; white-space: pre; }
+#hud b { color: #ff2df0; font-weight: 600; }
+
+/* --- pantalla de inicio --- */
+#start { position: fixed; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 10px; background: radial-gradient(ellipse at center, #16081f 0%, #06060a 70%);
+  cursor: pointer; text-align: center; }
+#start.hidden { display: none; }
+#start h1 { font-size: clamp(38px, 9vw, 92px); letter-spacing: 6px; color: #fff; text-shadow: 0 0 30px #b14bff; }
+#start h1 span { color: #ff2df0; }
+#start .sub { color: #6a6f85; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; }
+#start table { border-collapse: collapse; color: #9096ad; }
+#start td { padding: 2px 12px; }
+#start td:first-child { text-align: right; color: #22e9ff; }
+#start .go { margin-top: 18px; color: #fff; letter-spacing: 4px; animation: pulse 1.4s ease-in-out infinite; }
+#start .tip { color: #565b70; margin-top: 6px; }
+@keyframes pulse { 50% { opacity: .35; } }
