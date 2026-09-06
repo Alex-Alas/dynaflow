@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chrono Punk — prototipo</title>
+<link rel="stylesheet" href="./style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three.module.min.js",
+    "three/addons/": "./vendor/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="speedlines"></div>
+<div id="overlay"></div>
+<div id="crosshair"></div>
+
+<div id="vitals">
+  <div class="bar"><i id="hp"></i></div>
+  <div id="cds"><span id="cd-dash">DASH</span><span id="cd-jump">JUMP</span><span id="cd-aoe">AOE</span></div>
+</div>
+
+<div id="hud"></div>
+
+<div id="start">
+  <h1>CHRONO<span>PUNK</span></h1>
+  <p class="sub">prototipo de movimiento + combate</p>
+  <table>
+    <tr><td>WASD</td><td>mover</td></tr>
+    <tr><td>Mouse</td><td>cámara</td></tr>
+    <tr><td>Espacio</td><td>saltar / doble salto / wall jump</td></tr>
+    <tr><td>Shift</td><td>slide</td></tr>
+    <tr><td>E</td><td>air dash</td></tr>
+    <tr><td>Click izq</td><td>combo (x3)</td></tr>
+    <tr><td>Click der</td><td>launcher → combo aéreo</td></tr>
+    <tr><td>Q</td><td>giro 360° (AoE)</td></tr>
+    <tr><td>F</td><td>lock-on</td></tr>
+  </table>
+  <p class="go">CLICK PARA JUGAR</p>
+  <p class="tip">correr → slide → wall run → wall jump → air dash → launcher → combo aéreo</p>
+</div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
