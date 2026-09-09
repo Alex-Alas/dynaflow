@@ -22,7 +22,7 @@ export function update(dt, cam) {
   head.copy(player.pos).setY(player.pos.y + CAMERA.height - (PLAYER.height / 2 - player.hh));
 
   const cp = Math.cos(player.pitch);
-  dir.set(Math.sin(player.yaw) * cp, Math.sin(player.pitch), Math.cos(player.yaw) * cp).normalize();
+  dir.set(Math.sin(player.yaw) * cp, -Math.sin(player.pitch), Math.cos(player.yaw) * cp).normalize();
 
   // No dejar que la cámara entre en la geometría: acortar la distancia si hay muro.
   let dist = CAMERA.distance;
