@@ -1,7 +1,8 @@
 // Cámara en tercera persona: lerp de seguimiento, FOV dinámico por velocidad,
 // screenshake y raycast anti-atravesar-muros.
 import * as THREE from 'three';
-import { CAMERA, PLAYER } from './config.js';
+import { CAMERA } from './config.js';
+import { MOVE } from './stats.js';
 import { player } from './player.js';
 import { shakeState } from './fx.js';
 
@@ -19,7 +20,7 @@ export function init(cam, worldMeshes) {
 }
 
 export function update(dt, cam) {
-  head.copy(player.pos).setY(player.pos.y + CAMERA.height - (PLAYER.height / 2 - player.hh));
+  head.copy(player.pos).setY(player.pos.y + CAMERA.height - (MOVE.height / 2 - player.hh));
 
   const cp = Math.cos(player.pitch);
   dir.set(Math.sin(player.yaw) * cp, -Math.sin(player.pitch), Math.cos(player.yaw) * cp).normalize();

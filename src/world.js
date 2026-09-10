@@ -77,7 +77,11 @@ export function build(scene) {
   grid.material.opacity = 0.32;
   g.add(grid);
 
-  world.spawns = [[0, 12], [-10, -6], [12, 4], [-20, -10], [18, -12], [6, 22], [-26, 8]];
+  // Doce puntos repartidos: la oleada mezcla arquetipos y no deben salir en bloque.
+  world.spawns = [
+    [0, 12], [-10, -6], [12, 4], [-20, -10], [18, -12], [6, 22],
+    [-26, 8], [26, 16], [-16, 24], [20, -26], [-32, -4], [10, -22],
+  ];
   scene.add(g);
   return world;
 }
