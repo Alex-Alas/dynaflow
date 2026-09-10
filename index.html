@@ -21,7 +21,7 @@
 
 <div id="vitals">
   <div class="bar"><i id="hp"></i></div>
-  <div id="cds"><span id="cd-dash">DASH</span><span id="cd-jump">JUMP</span><span id="cd-aoe">AOE</span></div>
+  <div id="cds"><span id="cd-dash">DASH</span><span id="cd-jump">JUMP</span><span id="cd-sig">AOE</span></div>
 </div>
 
 <div id="hud"></div>
@@ -29,18 +29,23 @@
 <div id="start">
   <h1>CHRONO<span>PUNK</span></h1>
   <p class="sub">prototipo de movimiento + combate</p>
+
+  <!-- Las tarjetas las genera main.js a partir de kits.js: añadir un kit no toca el HTML. -->
+  <div id="kits"></div>
+
   <table>
     <tr><td>WASD</td><td>mover</td></tr>
     <tr><td>Mouse</td><td>cámara</td></tr>
     <tr><td>Espacio</td><td>saltar / doble salto / wall jump</td></tr>
     <tr><td>Shift</td><td>slide</td></tr>
     <tr><td>E</td><td>air dash</td></tr>
-    <tr><td>Click izq</td><td>combo (x3)</td></tr>
+    <tr><td>Click izq</td><td>combo</td></tr>
     <tr><td>Click der</td><td>launcher → combo aéreo</td></tr>
-    <tr><td>Q</td><td>giro 360° (AoE)</td></tr>
+    <tr><td>Q</td><td>habilidad firma del kit</td></tr>
     <tr><td>F</td><td>lock-on</td></tr>
+    <tr><td>1 2 3</td><td>cambiar de kit en caliente</td></tr>
   </table>
-  <p class="go">CLICK PARA JUGAR</p>
+  <p class="go">ELIGE UN KIT PARA JUGAR</p>
   <p class="tip">correr → slide → wall run → wall jump → air dash → launcher → combo aéreo</p>
 </div>
 

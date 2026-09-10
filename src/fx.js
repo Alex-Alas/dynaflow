@@ -100,7 +100,38 @@ export function ring(pos, color, to = 5, life = 0.4) {
   r.userData.to = to;
 }
 
+// ---------- cable del gancho ----------
+// Una sola línea reutilizada. Se refresca mientras el gancho tira y se apaga
+// sola: quien la dibuja no tiene que acordarse de ocultarla.
+let beamLine = null;
+let beamLife = 0;
+
+export function initBeam(s) {
+  beamLine = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]),
+    new THREE.LineBasicMaterial({ transparent: true, opacity: 0.9 }),
+  );
+  beamLine.visible = false;
+  beamLine.frustumCulled = false;
+  s.add(beamLine);
+}
+
+export function beam(a, b, color) {
+  if (!beamLine) return;
+  const p = beamLine.geometry.attributes.position;
+  p.setXYZ(0, a.x, a.y, a.z);
+  p.setXYZ(1, b.x, b.y, b.z);
+  p.needsUpdate = true;
+  beamLine.material.color.setHex(color);
+  beamLine.visible = true;
+  beamLife = 0.06;
+}
+
 export function update(dt) {
+  if (beamLine && beamLine.visible) {
+    beamLife -= dt;
+    if (beamLife <= 0) beamLine.visible = false;
+  }
   for (const s of sparks) {
     if (!s.visible) continue;
     const u = s.userData;

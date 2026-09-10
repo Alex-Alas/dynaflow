@@ -47,6 +47,8 @@ canvas { display: block; }
 #cds { display: flex; gap: 6px; margin-top: 6px; }
 #cds span { padding: 2px 7px; font-size: 10px; letter-spacing: 1px; border: 1px solid #ffffff26; color: #6a6f85; }
 #cds span.on { color: #0b0b12; background: #22e9ff; border-color: #22e9ff; box-shadow: 0 0 12px #22e9ff88; }
+/* overdrive activo: el HUD late al mismo ritmo que el cuerpo del personaje */
+#cds span.hot { background: #ff2df0; border-color: #ff2df0; box-shadow: 0 0 18px #ff2df0; animation: pulse .3s ease-in-out infinite; }
 
 /* --- HUD de tuning --- */
 #hud { right: 14px; top: 14px; text-align: right; font-size: 11px; color: #7c8199; white-space: pre; }
@@ -63,6 +65,22 @@ canvas { display: block; }
 #start table { border-collapse: collapse; color: #9096ad; }
 #start td { padding: 2px 12px; }
 #start td:first-child { text-align: right; color: #22e9ff; }
+/* --- selector de kit: cada tarjeta toma su color del propio kit (--c) --- */
+#kits { display: flex; gap: 12px; margin: 4px 0 18px; flex-wrap: wrap; justify-content: center; }
+.kit {
+  width: 190px; padding: 14px 14px 12px; position: relative; cursor: pointer; text-align: left;
+  font: inherit; color: #9096ad; background: #ffffff08; border: 1px solid #ffffff1f;
+  border-top: 2px solid var(--c); transition: background .12s, border-color .12s, transform .12s;
+}
+.kit:hover, .kit.on { background: #ffffff14; border-color: var(--c); transform: translateY(-2px); }
+.kit.on { box-shadow: 0 0 22px -6px var(--c); }
+.kit b { display: block; font-size: 17px; letter-spacing: 3px; color: var(--c); }
+.kit i { display: block; font-style: normal; font-size: 10px; letter-spacing: 1px;
+  text-transform: uppercase; color: #6a6f85; margin: 2px 0 8px; }
+.kit p { font-size: 11px; line-height: 1.5; }
+.kit u { position: absolute; top: 10px; right: 12px; text-decoration: none;
+  font-size: 10px; color: #565b70; border: 1px solid #ffffff26; padding: 0 5px; }
+
 #start .go { margin-top: 18px; color: #fff; letter-spacing: 4px; animation: pulse 1.4s ease-in-out infinite; }
 #start .tip { color: #565b70; margin-top: 6px; }
 @keyframes pulse { 50% { opacity: .35; } }
